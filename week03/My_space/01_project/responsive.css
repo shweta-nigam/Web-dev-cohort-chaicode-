@@ -1,0 +1,24 @@
+@media(max-width: 320px){
+    .dots-ring {
+        width: 10px;
+        height: 10px;
+        margin-right: 50px;
+    }
+    #firework-ball {
+        width: 400px;
+        height: 400px;
+        /* bottom: 200px;
+        left: 3px; */
+      }
+
+}
+/* @media (max-width : 1024px) {
+    #firework-ball {
+        bottom: 550px;
+    }
+}
+@media (max-width : 1760px) {
+    #firework-ball {
+        bottom: 850px;
+    }
+} */

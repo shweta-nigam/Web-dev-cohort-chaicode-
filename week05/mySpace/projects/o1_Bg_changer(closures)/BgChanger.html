@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bg Changer </title>
+</head>
+<style>
+    #create{
+        background-color: aquamarine;
+        padding: 10px;
+        border-radius: 7px;
+    }
+    input{
+        padding: 7px;
+        border-radius: 7px;
+    }
+    input:focus{
+        outline: none;
+    }
+    #btn-container button{
+        padding: 7px;
+        border-radius: 7px;
+        margin: 50px;
+        background-color: aqua;
+    }
+</style>
+<body>
+    <label for="color">Write Hash code or color name for Background Color:</label>
+    <input id="color">
+    <button id="create">Create</button>
+    <div id="btn-container"></div>
+
+    <script>
+         function changeBgColor(){
+            const color = document.getElementById("color")
+            const createBtn = document.getElementById("create")
+            const btnContainer = document.getElementById("btn-container")
+
+            createBtn.addEventListener("click",function(){
+                userColorInput = color.value.trim()
+                if(userColorInput === "") return;
+
+                const colorBtn = document.createElement("button")
+                btnContainer.appendChild(colorBtn)
+                colorBtn.innerText = `${userColorInput}`
+
+                 colorBtn.addEventListener("click", function(){
+                    document.body.style.backgroundColor = `${userColorInput}`
+                   colorBtn.remove()
+                 })
+                 
+                })
+         }
+         changeBgColor()
+    </script>
+</body>
+</html>

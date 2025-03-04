@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .main-container {
+        display: flex;
+        justify-content: center;
+        height: 80vh;
+        align-items: center;
+      }
+      .container {
+        height: 200px;
+        width: 230px;
+        background: linear-gradient(
+          0deg,
+          rgba(20, 167, 62, 1) 0%,
+          rgba(102, 247, 113, 1) 100%
+        );
+        border: 8px inset black;
+        display: grid;
+        grid-template-rows: auto auto auto;
+    }
+    #box-one{
+          display: flex;
+          justify-content: center;
+      }
+      #box-one .btn{
+        padding: 0 38px;
+      }
+    #box-two{
+        display: flex;
+        flex-direction: row;
+        /* align-items: center; */
+      }
+      #box-two .btn{
+         padding: 20px 6px;
+      }
+    #box-three{
+          display: flex;
+          justify-content: center;
+          align-items: start;
+      }
+      #box-three .btn{
+       padding: 5px 18px;
+      }
+      input{
+        background-color: grey;
+        border: 2px solid rgb(41, 2, 78);
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1> Calculator Not Working even after taking help from AI -- Going to make it again with just my help</h1>
+    <div class="main-container">
+      <div class="container">
+        <input type="text" id="input" >
+        <div id="box-one">
+          <button class="btn" id="clr">Clear</button>
+          <button class="btn" id="del"> Delete</button>
+        </div>
+        <div id="box-two">
+          <button class="btn" id="one">1</button>
+          <button class="btn" id="two">2</button>
+          <button class="btn" id="three">3</button>
+          <button class="btn" id="four">4</button>
+          <button class="btn" id="five">5</button>
+          <button class="btn" id="six">6</button>
+          <button class="btn" id="seven">7</button>
+          <button class="btn" id="eight">8</button>
+          <button class="btn" id="nine">9</button>
+          <button class="btn" id="zero">0</button>
+        </div>
+        <div id="box-three">
+          <button class="btn" id="plus-op">+</button>
+          <button class="btn" id="minus-op">-</button>
+          <button class="btn" id="mul-op">x</button>
+          <button class="btn" id="div-op">/</button>
+          <button class="btn" id="eq-op">=</button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promises and Api</title>
+  </head>
+  <body>
+    <ul id="items"></ul>
+    <div id="items-img"></div>
+    <script>
+      // *********     clean code      ********
+      const items = document.getElementById("items");
+      function renderToScreen(obj) {
+        const products = obj.data.data;
+        console.log(products);
+        products.forEach((product) => {
+          const li = document.createElement("li");
+          li.innerText = product.title;
+          items.appendChild(li);
+
+          // img
+          if (Array.isArray(product.images)) {
+            product.images.forEach((imgURL) => {
+              const img = document.createElement("img");
+              img.src = imgURL;
+              console.log("Setting image src:", imgURL);
+              img.onerror = function () {
+                console.log("Error loading image, setting fallback");
+                this.src = `https://cdn.pixabay.com/photo/2023/08/08/15/01/flower-8177578_640.jpg`;
+              };
+              li.appendChild(img);
+            });
+          } else if (typeof product.images === "string") {
+            const img = document.createElement("img");
+            img.src = product.images;
+
+            li.appendChild(img);
+          }
+        });
+      }
+
+      fetch("https://api.freeapi.app/api/v1/public/randomproducts")
+        .then((response) => response.json())
+        .then(renderToScreen)
+        .catch((err) => {})
+        .finally(() => {});
+
+      // *********   Not  clean code      ********
+      // 4x- 3y = 10k  -- a
+      // 3x - 2y = 10k -- b  40k
+      // const items = document.getElementById("items")
+
+      // fetch("https://api.freeapi.app/api/v1/public/randomproducts")
+      // .then((response)=> {
+      //     response
+      //     .json()
+      //     .then((obj)=>{                         // then of JSON
+      //         const products = obj.data.data;
+      //         console.log(products)
+      //         products.forEach((product)=>{
+      //             const li = document.createElement("li")
+      //             li.innerText = product.title;
+      //             items.appendChild(li)
+      //         })
+      //     })
+      //     .catch((err)=>{
+      //         console.log("Error converting JSON")     // catch of JSON
+      //     });
+      // })
+      // .catch((err)=>{})
+      // .finally(()=> {})
+    </script>
+  </body>
+</html>

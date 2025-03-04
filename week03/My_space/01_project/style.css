@@ -1,0 +1,159 @@
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  
+}
+h1{
+    margin: 10px;
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.dots-ring {
+  position: absolute;
+  background: radial-gradient(circle, #ffd700, #ffa500);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  animation: fade 2s ease-in-out;
+ /* margin-left: -1px ; */
+}
+
+#firework-ball {
+  width: 700px;
+  height: 700px;
+  bottom: 400px;
+  left: 50%; 
+  position: absolute; 
+  transform: translateX(-50%); 
+  border-radius: 50%;
+  z-index: 1;
+  animation: colors-for-firework-ball 3s ease-in-out ;
+}
+.firework-sparkle {
+  position: absolute;
+  background: radial-gradient(circle, #ff7b00, #2600ff);
+  border-radius: 50px;
+  width: 8px;
+  height: 20px;
+  gap: 10px;
+  animation: fall 7s linear forwards;
+}
+.firework-sparkle-two {
+  position: absolute;
+  background: radial-gradient(circle, #00e1ff, #7bff00);
+  border-radius: 60px;
+  width: 7px;
+  height: 15px;
+  gap: 10px;
+  animation: fall 8s linear forwards;
+}
+.firework-sparkle-three {
+  position: absolute;
+  background: radial-gradient(circle, #d9ff00e5, #ff7300);
+  border-radius: 20px;
+  width: 7px;
+  height: 25px;
+  gap: 10px;
+  animation: fall 7s linear forwards;
+}
+.firework-sparkle-four {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #a108c7c7, #0fd69a);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: relative;
+  transform: rotate(45deg);
+  animation: fall 10s linear forwards;
+}
+.firework-sparkle-five {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #08c79ec7, #d3d60f);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: absolute;
+  transform: rotate(45deg);
+  animation: fall 10s linear forwards;
+}
+.firework-sparkle-six {
+  width: 10px;
+  height: 20px;
+  background: radial-gradient(circle, #c708a7c7, #d3d60f);
+  border-radius: 50% 50% 50% / 60% 60% 40%;
+  position: absolute;
+  transform: rotate(45deg);
+  animation: fall 10s linear forwards;
+}
+
+/* keyframes */
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes colors-for-firework-ball {
+    0% {  background: radial-gradient(circle, #ffffff 5%, #ffd700 15%, #ff4500 30%, #ff1493 45%, #9400d3 50%, #13df79d6 60%, #4b0082 85%, #1e90ff 90%, #000000 100%);
+     box-shadow: 0 0 20px #ffd700, 0 0 40px#fff700, 0 0 60px #ff1493; 
+    }
+    20% {  background: radial-gradient(circle, #ffffffc9 5%, #ffd900d0 15%, #ff4400cc 30%, #ff1491cb 45%, #9400d3ce 50%, #13df79be 60%, #4c0082c2 85%, #1e8fffc9 90%, #000000d2 100%);
+        box-shadow: 0 0 20px #ffd900d3, 0 0 40px#fff700c5, 0 0 60px #ff1491d0; }
+    40% {  background: radial-gradient(circle, #ffffff9c 5%, #ffd9009f 15%, #ff44009c 30%, #ff14919c 45%, #9400d39a 50%, #13df799a 60%, #4c00829a 85%, #1e8fff8c 90%, #0000009a 100%);
+        box-shadow: 0 0 20px #ffd9008f, 0 0 40px#fff7008c, 0 0 60px #ff149191;  }
+    60% { background: radial-gradient(circle, #ffffff5b 5%, #ffd9006b 15%, #ff440067 30%, #ff149163 45%, #9400d362 50%, #13df795b 60%, #4c008262 85%, #1e8fff57 90%, #00000069 100%);
+        box-shadow: 0 0 20px #ffd90056, 0 0 40px#fff70050, 0 0 60px #ff149159;  }
+    80% { background: radial-gradient(circle, #ffffff34 5%, #ffd9003a 15%, #ff44003b 30%, #ff149136 45%, #9400d33b 50%, #13df793d 60%, #4c008242 85%, #1e8fff31 90%, #00000046 100%);
+        box-shadow: 0 0 20px #ffd90033, 0 0 40px#fff7003b, 0 0 60px #ff149134;  }
+    100% { background: radial-gradient(circle, #ffffff00 5%, #ffd90000 15%, #ff440000 30%, #ff149100 45%, #9400d300 50%, #13df7900 60%, #4c008200 85%, #1e8fff00 90%, #00000000 100%);
+        box-shadow: 0 0 20px #ffd90000, 0 0 40px#fff70000, 0 0 60px #ff149100;  }
+    }
+
+    @keyframes fall {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(300px); 
+          opacity: 0;
+        }
+      }
+
+button{
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 20px;
+}
+
+.button-88:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
+}
+
+.button-88:active {
+  box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+}
+    

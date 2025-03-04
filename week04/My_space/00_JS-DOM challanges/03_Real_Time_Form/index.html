@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input Form</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      label {
+        font-weight: bold;
+        margin: 5px;
+      }
+      input {
+        padding: 8px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        width: 80vw;
+        margin: 5px;
+      }
+      #bio{
+        height: 40px;
+      }
+      .preview-container p{
+        font-weight: bold;
+        
+      }
+      .preview-container span{
+        font-weight: lighter;
+        color: black;
+      }
+      .preview-container{
+        background: rgb(230, 226, 226);
+        padding: 10px ;
+        border-radius: 7px;
+        color: rgb(6, 6, 75);
+        margin: 10px;
+        width: 80vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Profile Form</h1>
+      <p>Enter your information below to see it displayed in real-time:</p>
+      <div class="form-container">
+
+        <label for="name">Name:</label><br />
+        <input id="name" type="text" placeholder="Enter your name" /><br>
+
+        <label for="job-title">Job Title:</label><br />
+        <input id="job-title" type="text" placeholder="Enter your job title" /><br>
+
+        <label for="age">Age:</label><br />
+        <input id="age" type="number" placeholder="Enter your age" /><br>
+
+        <label for="bio">Bio:</label><br />
+        <input id="bio" type="textarea" placeholder="Tell us about your self" /><br>
+      </div>
+      <div class="preview-container">
+        <h2>Profile Preview</h2>
+        <p>Name: <span id="name-time-update">Not Provided</span></p>
+        <p>Job Title: <span id="job-time-update">Not Provided</span></p>
+        <p>Age: <span id="age-time-update">Not Provided</span></p>
+        <p>Bio: <span id="bio-time-update">Not Provided</span></p>
+      </div>
+    </div>
+    <script>
+        const name = document.getElementById("name")
+        const jobTitle = document.getElementById("job-title")
+        const age = document.getElementById("age")
+        const bio = document.getElementById("bio")
+
+        const realUpdateName = document.getElementById("name-time-update")
+        const realUpdateJobTitle = document.getElementById("job-time-update")
+        const realUpdateAge = document.getElementById("age-time-update")
+        const realUpdateBio = document.getElementById("bio-time-update")
+
+        name.addEventListener("input", function(){
+            // update the name in real time
+            realUpdateName.textContent = name.value
+        })
+         jobTitle.addEventListener("input", function(){
+            realUpdateJobTitle.textContent = jobTitle.value
+         })
+        age.addEventListener("input", function(){
+           realUpdateAge.textContent = age.value
+        })
+        bio.addEventListener("input", function(){
+            realUpdateBio.innerText = bio.value
+        })
+    </script>
+  </body>
+</html>

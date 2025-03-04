@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change Text Color</title>
+    <style>
+      .container{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+      .btns button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        margin: 3px;
+      }
+      #red-btn {
+        background: red;
+      }
+      #green-btn {
+        background: rgb(7, 204, 7);
+      }
+      #blue-btn {
+        background: rgb(15, 75, 185);
+      }
+      #purple-btn {
+        background: rgb(118, 10, 168);
+      }
+      #re-btn {
+        background: rgb(45, 44, 54);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="heading">Change My Color!</h1>
+      <p>Click a button to Change the text color:</p>
+      <div class="btns">
+        <button id="red-btn" onclick="redColor()" >Red</button>
+        <button id="green-btn" onclick="greenColor()">Green</button>
+        <button id="blue-btn" onclick="blueColor()">Blue</button>
+        <button id="purple-btn" onclick="purpleColor()">Purple</button>
+        <button id="re-btn" onclick="resetColor()">Reset</button>
+      </div>
+    </div>
+    <script>
+        const heading = document.getElementById("heading");
+        const redBtn = document.getElementById("red-btn")
+        const greenBtn = document.getElementById("green-btn")
+        const blueBtn = document.getElementById("blue-btn")
+        const purpleBtn = document.getElementById("purple-btn")
+        const resetBtn = document.getElementById("re-btn")
+
+        // let isColorBlack = true;    // true
+
+        function redColor(){
+            heading.style.color = "red"
+        }
+        function greenColor(){
+            heading.style.color = "green"
+        }
+        function blueColor(){
+            heading.style.color = "blue"
+        }
+        function purpleColor(){
+            heading.style.color = "purple"
+        }
+        function resetColor(){
+            heading.style.color = "black"
+        }
+
+        // function changeColor(color){
+        //     switch (color) {
+        //         case red:
+        //             heading.style.color = "red"
+        //             break;
+        //         case green:
+        //             heading.style.color = "green"
+        //             break;
+        //         case blue:
+        //             heading.style.color = "blue"
+        //             break;
+        //         case red:
+        //             heading.style.color = "purple"
+        //             break;
+            
+        //         default:
+        //             heading.style.color = "black"
+        //             break;
+        //     }
+        // }
+    </script>
+  </body>
+</html>
