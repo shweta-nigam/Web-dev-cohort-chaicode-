@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Carousel</title>
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+      h1 {
+        text-align: center;
+      }
+      .full-img {
+        position: relative;
+        /* width: 100%; */
+      }
+      .full-img img {
+        width: 600px;
+        height: 400px;
+        object-fit: cover;
+      }
+      .full-img button {
+        border: 2px solid blueviolet;
+        opacity: 0.8;
+        border-radius: 8px;
+      }
+      .full-img button:hover{
+        box-shadow: 2px 2px white;
+        cursor: pointer;
+      }
+      #next {
+        position: absolute;
+        top: 50%;
+        right: 2px;
+      }
+      #previous {
+        position: absolute;
+        top: 50%;
+        left: 2px;
+      }
+      #auto-play-btn {
+        margin: 10px;
+        display: inline;
+        background: purple;
+        padding: 10px;
+        border-radius: 10px; 
+        border: 3px inset white; 
+        color: white;
+      }
+      #auto-play-btn:hover{
+        box-shadow: 2px 2px purple;
+        cursor: pointer;
+      }
+      .overlay {
+        position: absolute;
+        bottom: 4px;
+        background: black;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        height: 50px;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+      }
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Add spacing between button & timer */
+        margin-top: 10px;
+      }
+      .dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+  margin-top: 10px;
+}
+#timer {
+    display: none; /* Initially hide the timer */
+  }
+
+  @media (max-width:500px) {
+    .full-img img {
+        width: 80vw;
+        height: 60vh;
+    }
+  }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Image Carousel</h1>
+      <div class="full-img">
+        <img
+          class="displayed-img"
+          src="imgs/img1.jpg"
+          alt="Image of earth by AI"
+        />
+        <div class="overlay">
+          <div class="description">Image Of wonder world</div>
+        </div>
+        <button id="next">→</button>
+        <button id="previous">←</button>
+      </div>
+      <div class="indicators">
+            <span class="dot" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+            <span class="dot" data-index="5"></span>
+        </div>
+      <div class="controls">
+        <button id="auto-play-btn">Start Auto Play</button>
+        <div id="timer">Next image in <span>5</span>s</div>
+      </div>
+    </div>
+    <script>
+        // step1 storing references in variable
+      const currentImg = document.querySelector(".displayed-img");
+      const nextBtn = document.getElementById("next")
+      const prevBtn = document.getElementById("previous")
+      const autoBtn = document.getElementById("auto-play-btn")
+      const timerText = document.querySelector("#timer span")
+      const description = document.querySelector(".description")
+      const timerDiv = document.getElementById("timer")
+      const dots = document.querySelectorAll(".dot")
+
+//step2: array of imgs and description
+      const imgsArr = [
+  "imgs/img1.jpg",
+  "imgs/img2.avif",
+  "imgs/img3.avif",
+  "imgs/img4.jpg",
+  "imgs/img5.avif",
+  "imgs/img6.avif",
+
+      ];
+
+      const desArr = ["Image of wonder world", "universe-2", "universe", "Art of Eye", "Pink tree house", "Just too much color"];
+
+      let currentIndex = 0
+      let autoPlayInterval;      
+    
+          // toggle btn
+    
+ let isAutoPlaying = false
+ 
+ function toggleAutoPlay(){
+     if(isAutoPlaying){
+         stopAutoPlay()
+     } else {
+         startAutoPlay()
+     }
+ }
+
+      function showImage(index){
+        currentIndex = index;
+        currentImg.src = imgsArr[currentIndex]
+        description.textContent = desArr[currentIndex]
+      }
+
+      // for next image
+    function nextImage(){
+      currentIndex = (currentIndex + 1) % imgsArr.length     // why % ?
+      showImage(currentIndex)
+    }
+    // previous img
+    function prevImage(){
+      currentIndex = (currentIndex - 1  + imgsArr.length) % imgsArr.length  // ?
+      showImage(currentIndex)
+    }
+
+    //step 3: auto slides
+    function startAutoPlay(){
+        clearInterval(autoPlayInterval)
+        timerDiv.style.display = "block"
+        autoBtn.innerText = "Stop Auto Play"
+        isAutoPlaying = true
+
+        let countDown = 5;
+        
+        autoPlayInterval = setInterval(()=>{
+            if(countDown === 0){
+                nextImage()
+                countDown = 5;
+            }
+            timerText.textContent = countDown;
+            countDown--;
+        },1000)
+
+    }
+
+    // stop auto play on the click of next or prev
+    function stopAutoPlay(){
+        clearInterval(autoPlayInterval);
+        timerDiv.style.display = "none"
+        autoBtn.innerText = "Start Auto Play"
+        isAutoPlaying = false
+    }
+
+    // Click event for indicators
+    dots.forEach(dot => {
+        dot.addEventListener("click", function (){
+             // Remove color from all dots
+        dots.forEach(d => d.style.background = ""); 
+
+            const index = parseInt(this.getAttribute("data-index"));
+            showImage(index)
+            startAutoPlay()
+            dot.style.background = "purple"
+        })
+    })
+
+
+    // step 5: event listeners
+    
+    autoBtn.addEventListener("click",toggleAutoPlay)
+    nextBtn.addEventListener("click",()=>{
+        nextImage();
+        stopAutoPlay()
+    })
+    prevBtn.addEventListener("click",()=>{
+        prevImage();
+        stopAutoPlay()
+    })
+    
+        
+    </script>
+  </body>
+</html>

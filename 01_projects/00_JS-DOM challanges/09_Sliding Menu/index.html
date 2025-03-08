@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Menu</title>
+    <style>
+        body{
+            position: relative;
+        }
+        #open-menu-btn{
+            background: rgb(68, 199, 42);
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            border: none;
+            margin: 10px;
+        }
+        #menu-items li{
+          list-style: none;
+          padding: 10px;
+          background: rgb(233, 230, 226);
+          margin: 7px ;
+          width: 200px;
+          /* position: absolute; */
+          border-radius: 7px;
+        }
+        #menu-items li:hover{
+            background-color:  rgb(206, 201, 195);
+            box-shadow: 2px 2px white;
+        }
+        #menu{
+            padding: 10px;
+            margin: 0;
+            position: fixed;
+            right: 0;
+            top: 0;
+            display: none;
+            background-color: rgb(218, 212, 212);
+            height: 100vh;
+            /* width: 50vw; */
+            transition:  transform 0.5s ease-in-out;
+            box-shadow: 6px 6px 6px 6px rgb(138, 131, 131);
+        }
+        #close-menu-btn{
+            background: rgb(228, 69, 41);
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            border: none;
+            margin: 10px;
+            right: 1px;
+            position: absolute;
+           /* top: 30px; */
+        }
+        #close-menu-btn:hover{
+            background: rgb(236, 81, 54);
+            box-shadow: 2px 2px white;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Main Content</h2>
+    <button id="open-menu-btn">Open Menu</button>
+    <p>Click the button to open the sliding menu</p>
+
+    <div id="menu">
+        <button id="close-menu-btn" >X</button>
+        <h3>Menu items</h3>
+       <ul id="menu-items">
+        <li id="home">Home</li>
+        <li id="about">About</li>
+        <li id="services">Services</li>
+        <li id="contact">Contact</li>
+       </ul>
+    </div>
+    <script>
+        function openMenu(){
+           const openBtn = document.getElementById("open-menu-btn")
+           const menu = document.getElementById("menu")
+           const closeBtn = document.getElementById("close-menu-btn")
+
+
+           openBtn.addEventListener("click",function(){
+             menu.style.display = "block"
+             menu.style.transform = `translateX(5px)`
+           })
+
+           closeBtn.addEventListener("click",function(){
+            menu.style.display = "none"
+           })
+
+           document.addEventListener("click",function(event){
+            if(!menu.contains(event.target) && event.target !==openBtn ){
+                menu.style.transform = "transformX(200px)"
+                setTimeout(()=>{
+                    menu.style.display = "none"
+                },300)
+            }
+           })
+
+
+        }
+        openMenu()
+
+        function alertMessage(){
+           const home = document.getElementById("home")
+           const about = document.getElementById("about")
+           const services = document.getElementById("services")
+           const contact = document.getElementById("contact")
+
+           home.addEventListener("click",function(){
+            alert("You clicked home page")
+           })
+           services.addEventListener("click",function(){
+            alert("You clicked services page")
+           })
+           contact.addEventListener("click",function(){
+            alert("You clicked contact page")
+           })
+           about.addEventListener("click",function(){
+            alert("You clicked about page")
+           })
+        }
+        alertMessage()
+    </script>
+</body>
+</html>

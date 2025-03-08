@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kanban board</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>kanban Board</h1>
+        <div class="boards-container">
+            <div id="to-do-board" class="board">
+                <h4 class="card-heading">To-do</h4>
+                <p draggable="true" class="card" >learn react and do what you want</p>
+                <button id="todo-add-btn">Add task</button>
+            </div>
+            <div id="doing-board" class="board">
+                <h4 class="card-heading">Doing</h4>
+                <p draggable="true"   class="card"> js and math</p>
+                <button id="doing-add-btn">Add task</button>
+            </div>
+            <div id="done-board" class="board">
+                <h4 class="card-heading">Done</h4>
+                <p draggable="true" class="card">JS learning</p>
+                <button class="colors">Color</button> 
+                <button id="done-add-btn">Add task</button>
+            </div>
+        </div>
+        <section id="color-picker">
+            <label>Pick color:</label>
+            <select name="colors" id="color-option">
+                <option value="mediumslateblue">🟣</option>
+                <option value="paleturquoise">🔵</option>
+                <option value="crimson">🔴</option>
+                <option value="green">🟢</option>
+            </select>
+        </section>
+    </div>
+    <script src="script.js" ></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Management</title>
+  <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Task List</h1>
+
+      <div class="input-container">
+        <input id="input-field" type="text" placeholder="Add new task..." />
+        <button id="add-btn" onclick="addTasks()">Add</button>
+      </div>
+
+      <div class="items-container">
+        <p id="default-line">No tasks yet.  Add one above!</p>
+        <ul id="tasks">  </ul>
+      </div>
+
+      <div class="states">
+        <p id="left-p">Total tasks: <span id="total-task">0</span></p>
+        <p id="right-p">Completed: <span id="completed-tasks">0</span></p>
+      </div>
+    </div>
+    <script>
+      // step 1 saving references in variables
+      const inputField = document.getElementById("input-field")
+      const addBtn = document.getElementById("add-btn")
+      const defaultPara = document.getElementById("default-line")
+      const tasks = document.getElementById("tasks")
+      const totalTask = document.getElementById("total-task")
+      const completedTask = document.getElementById("completed-tasks")
+
+      //  step 3 total and completed task 
+      function updateTaskCount(){
+        const totalTask_s = tasks.children.length
+        const completedTaskArray = Array.from(tasks.children)
+        const completedTask_s = completedTaskArray.filter((task)=>{
+           return task.querySelector("input[type = 'checkbox']").checked
+        }).length
+        // console.table(completedTaskArray,completedTask_s,totalTask_s)
+         
+        totalTask.textContent = totalTask_s
+        completedTask.textContent = completedTask_s
+
+        if(totalTask_s === 0){
+          defaultPara.style.display = "block"
+        } else{
+          defaultPara.style.display = "none"
+        }
+      }
+
+      // step 2 creating div and li , del button
+      function addTasks(){
+        const inputValue = inputField.value;      // to get fresh value
+        if(inputValue === "") return;
+
+
+        const div = document.createElement("div")
+        const checkbox = document.createElement("input")
+        const li = document.createElement("li")
+        const delBtn = document.createElement("button")
+
+        li.textContent = inputValue   // putting value in li
+        delBtn.innerText = "Delete"
+ 
+        div.appendChild(checkbox)
+        div.appendChild(li)
+        div.appendChild(delBtn)
+        tasks.appendChild(div)
+        inputField.value = "";     // clear input
+
+
+        //checkbox
+        checkbox.type = "checkbox"
+        checkbox.addEventListener("change",function(){
+          if(checkbox.checked){
+            li.style.textDecoration = "line-through"
+            li.style.opacity = 0.5
+          }else{
+            li.style.textDecoration = "none"
+            li.style.opacity = 1
+          }
+          updateTaskCount()      // calling updateCount function with change in checkbox
+        })
+
+        delBtn.addEventListener("click",()=>{       
+          div.remove();                   //deleting the entire div
+          updateTaskCount()
+        })
+          
+        updateTaskCount()
+      }
+
+     
+      
+    </script>
+  </body>
+</html>

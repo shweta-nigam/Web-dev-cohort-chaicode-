@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulb Toggle</title>
+</head>
+<style>
+    .container{
+        position: relative; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .shiny-bulb{
+        height: 180px;
+        width: 180px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #ffffff 5%, #ffd700 15%, #ff4500 30%, #ff1493 45%, #89d300 50%, #df9813d6 60%, #d6d302 85%, #1e90ff 90%, #000000 100%);
+        box-shadow: 0 0 20px #ffd700, 0 0 40px#fff700, 0 0 60px #ff1493; 
+    }
+    .bulb{
+        height: 180px;
+        width: 180px;
+        background: rgb(111, 115, 124);
+        border-radius: 50%;
+    }
+    
+    #cap{
+        height: 80px;
+        width: 50px;
+        background: gray;
+        border-radius: 8px;
+        position: absolute;
+        margin-left: 63px;
+        /* top: 363px; */
+    }
+   
+    #toggle-btn{
+        border: 3px solid rgba(148, 139, 139, 0.897);
+        padding: 15px;
+        border-radius: 9px;
+        background-color: #1e90ff;
+        color: white;
+        /* margin: 5px 50px; */
+        margin-top: 100px;
+    }
+    #status{
+        margin: 15px 55px; 
+    }
+   
+</style>
+<body>
+    <div class="container">
+        <h1 class="t-col">Light Bulb Toggle</h1>
+        <p class="t-col">Click the button to turn the light bulb on or off</p>
+        <div class="bulb-container">
+            <div class="bulb"></div>
+            <div id="cap"></div>
+        </div>
+            <button id="toggle-btn" onclick="changeWebPage()">Turn On</button>
+            <p class="t-col" id="status">Status: Off</p>
+    </div>
+    <script>
+        const toggleBtn = document.getElementById("toggle-btn");
+        const status = document.getElementById("status");
+        const bulb = document.getElementsByClassName("bulb")[0]
+        const textColor = document.querySelectorAll(".t-col")
+        const body = document.body;
+        let isLightOn = false          // used let because value is changing
+
+        function changeWebPage(){
+            if(isLightOn){
+                body.style.background = "white"
+                toggleBtn.innerText = "Turn On"
+                status.innerText = "Status: Off"
+                bulb.classList.remove("shiny-bulb")
+                bulb.classList.add("bulb")
+                textColor.forEach((text)=> text.style.color = "black")
+            } else {
+                body.style.background = "black"
+                bulb.classList.add("shiny-bulb")
+                bulb.classList.remove("bulb")
+                toggleBtn.innerText = "Turn Off"
+                status.innerText = "Status: On"
+                textColor.forEach((text)=> text.style.color = "white")
+            }
+           isLightOn = !isLightOn;
+        }
+       
+
+    </script>
+</body>
+</html>

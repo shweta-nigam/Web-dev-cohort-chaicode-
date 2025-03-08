@@ -1,0 +1,290 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: rgb(69, 7, 128);
+}
+h1{
+    font-size: 2.5rem;
+    font-family: cursive;
+}
+.container{
+    background: rgb(69, 7, 128);
+    color: white;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#clock{
+    background: rgb(166, 42, 224);
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    border: 7px solid rgb(126, 33, 231);
+    position: relative;
+    z-index: 1;
+}
+#center-dot{
+    background: rgb(236, 231, 238);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgb(126, 33, 231);
+    position: absolute;
+    top: 45%;
+    left: 47%;
+    z-index: 1;
+}
+#sec-hand{
+    height: 180px;
+    width: 6px;
+    background: rgb(205, 226, 14);
+    border-radius: 5px;
+}
+#min-hand{
+    height: 160px;
+    width: 10px;
+    background: rgb(177, 6, 126);
+    border-radius: 5px;
+}
+#hr-hand{
+    height: 140px;
+    width: 15px;
+    background: rgb(15, 134, 189);
+    border-radius: 5px;
+}
+.nums{
+    font-size: 46px;
+    position: absolute;
+}
+.twelve{
+    top: 15px;
+    left: 48%;
+}
+.one{
+    top: 45px;
+    left: 70%;
+}
+.two{
+    top: 24%;
+    right: 10%;
+}
+.three{
+    top: 44%;
+    right: 4%;
+}
+.four{
+    bottom: 25%;
+    right: 10%;
+}
+.five{
+ bottom: 8%;
+right: 25%;
+}
+.six{
+    bottom: 10px;
+    left: 48%;
+}
+.seven{
+    bottom: 9%;
+    left: 25%;
+}
+.eight{
+    bottom: 25%;
+    left: 10%;
+}
+.nine{
+    top: 44%;
+    left: 4%;
+}
+.ten{
+    top: 20%;
+    left: 9%;
+}
+.eleven{
+    top: 7%;
+    left: 25%;
+}
+
+/* Common styles for clock hands */
+#sec-hand, #min-hand, #hr-hand {
+position: absolute;
+bottom: 50%;
+left: 50%;
+transform-origin: bottom center; /* Set rotation point */
+transform: translateX(-50%) rotate(0deg);
+border-radius: 5px;
+}    body{
+    margin: 0;
+    padding: 0;
+    background: rgb(69, 7, 128);
+}
+.container{
+    background: rgb(69, 7, 128);
+    color: white;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 50px;
+}
+#clock{
+    background: rgb(166, 42, 224);
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    border: 7px solid rgb(126, 33, 231);
+    position: relative;
+    z-index: 1;
+}
+#center-dot{
+    background: rgb(236, 231, 238);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgb(126, 33, 231);
+    position: absolute;
+    top: 45%;
+    left: 47%;
+    z-index: 1;
+}
+#sec-hand{
+    height: 180px;
+    width: 6px;
+    background: rgb(205, 226, 14);
+    border-radius: 5px;
+}
+#min-hand{
+    height: 160px;
+    width: 10px;
+    background: rgb(177, 6, 126);
+    border-radius: 5px;
+}
+#hr-hand{
+    height: 140px;
+    width: 15px;
+    background: rgb(15, 134, 189);
+    border-radius: 5px;
+}
+.nums{
+    font-size: 46px;
+    position: absolute;
+}
+.twelve{
+    top: 15px;
+    left: 48%;
+}
+.one{
+    top: 45px;
+    left: 70%;
+}
+.two{
+    top: 24%;
+    right: 10%;
+}
+.three{
+    top: 44%;
+    right: 4%;
+}
+.four{
+    bottom: 25%;
+    right: 10%;
+}
+.five{
+ bottom: 8%;
+right: 25%;
+}
+.six{
+    bottom: 10px;
+    left: 48%;
+}
+.seven{
+    bottom: 9%;
+    left: 25%;
+}
+.eight{
+    bottom: 25%;
+    left: 10%;
+}
+.nine{
+    top: 44%;
+    left: 4%;
+}
+.ten{
+    top: 20%;
+    left: 9%;
+}
+.eleven{
+    top: 7%;
+    left: 25%;
+}
+
+#time{
+    
+    font-size: 2rem;
+    font-weight: bold;
+}
+#show-time{
+    margin-top: 20px;
+    background: rgb(182, 8, 182);
+    border: 2px inset white;
+    box-shadow: 3px 3px white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Common styles for clock hands */
+#sec-hand, #min-hand, #hr-hand {
+position: absolute;
+bottom: 50%;
+left: 50%;
+transform-origin: bottom center; /* Set rotation point */
+transform: translateX(-50%) rotate(0deg);
+border-radius: 5px;
+}
+
+@media (max-width:500px) {
+    #clock { width: 250px;
+    height: 250px;}
+
+    #center-dot{
+        width: 20px;
+        height: 20px;
+        top: 45%;
+        left: 47%;
+        z-index: 1;
+    }
+    .nums{
+        font-size: 36px;
+    }
+    #sec-hand{
+        height:100px;
+        width: 4px;
+    }
+    #min-hand{
+        height: 80px;
+        width: 6px;
+    }
+    #hr-hand{
+        height: 70px;
+        width: 10px;
+    }
+    .twelve{
+        top: 7px;
+        left: 48%;
+    }
+    .one{
+        top: 25px;
+        left: 70%;
+    }
+    .ten{
+        top: 25%;
+        left: 9%;
+    }
+
+}

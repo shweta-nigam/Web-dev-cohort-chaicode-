@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion</title>
+</head>
+<style>
+     .container{
+        /* width: 80%; */
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+     }
+     
+    .accordion{
+        background:whitesmoke;
+        /* padding: 5px 10px; */
+        margin: 20px;
+        border-radius: 10px;
+    }
+    .heading{
+        background: rgb(65, 193, 243);
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        border-radius: 10px  0;
+        font-family: cursive;
+        width: 50vw;
+    }
+    .heading:hover{
+      box-shadow: 4px 4px rgb(86, 172, 221);
+      background: rgba(87, 193, 235, 0.856);
+    }
+    /* hide the accordion */
+    .content{
+        padding: 7px;
+        display: none;
+        width: 50vw;
+    }
+    .arrow{
+        background: rgb(65, 193, 243);
+        border: none;
+        border-radius: 50%;
+    }
+    .arrow:hover{
+        background: rgba(87, 193, 235, 0.856); 
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>Simple Accordion</h1>
+        <section class="accordion first">
+           <div class="heading">
+            <p>About US</p>
+            <button class="arrow">↡</button>
+            <!-- <p>↟</p> -->
+           </div>
+           <div class="content">
+            <p>At our music company, we are passionate about delivering exceptional musical experiences to artists and audiences alike.</p>
+           </div>
+        </section>
+        <section class="accordion second">
+           <div class="heading">
+            <p>Services</p>
+            <button class="arrow">↡</button>
+            <!-- <p>↟</p> -->
+           </div>
+           <div class="content">
+            <p>At our music company, we provide many exceptional musical experiences to artists and audiences alike.</p>
+           </div>
+        </section>
+        <section class="accordion third">
+           <div class="heading">
+            <p>Contact</p>
+            <button class="arrow">↡</button>
+            <!-- <p>↟</p> -->
+           </div>
+           <div class="content">
+            <p>To contact us reach us through phone or line at 1-xxx-474-xxxx or email us at umpg.exapmle@umusic.com.</p>
+           </div>
+        </section>
+    </div>
+    <script>
+      const headers = document.querySelectorAll(".heading")
+      const arrowBtn = document.querySelectorAll(".arrow")
+      const content = document.querySelectorAll(".content")
+     
+      headers.forEach((header)=>{
+        header.addEventListener("click", function(){
+           const content = this.nextElementSibling;
+           const arrow = this.querySelector(".arrow")
+
+           document.querySelectorAll(".content").forEach((item)=>{
+            if(item !== content){
+                item.style.display = "none"
+                item.previousElementSibling.querySelector(".arrow").textContent = "↟"
+            }
+           })
+                // Toggle the clicked one
+        if (content.style.display === "block") {
+            content.style.display = "none";
+            arrow.textContent = "↡"; 
+        } else {
+            content.style.display = "block";
+            arrow.textContent = "↟"; 
+        }
+        })
+      })
+
+
+      function showCard(){
+         content.style.display = "block"
+      }
+
+      arrowBtn.addEventListener("click",showCard)
+
+    </script>
+</body>
+</html>
