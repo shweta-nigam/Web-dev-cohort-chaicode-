@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" onkeyup="optimizedSearch()">
+
+
+    <script >
+  
+    function debounce(fn,delay = 2000){
+        let timer;         // Declares a timer variable that will hold the ID of the timeout, used to cancel it if needed.
+
+
+        return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(()=>{
+                fn.apply(this,args)
+            },delay)
+        }
+      
+    }
+
+   function myFun(){
+    return console.log("Doing an api call")
+   }
+    const optimizedSearch = debounce(myFun)
+    </script>
+</body>
+</html>

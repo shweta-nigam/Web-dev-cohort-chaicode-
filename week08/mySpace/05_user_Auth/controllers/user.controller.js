@@ -1,7 +1,7 @@
 import { sendVerificationEmail } from "../utils/sendingmail.utils.js";
 import User from "../models/user.model.js";
 import crypto from "crypto"; // no need to install explicitly
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 //register user
 const registerUser = async (req, res) => {
@@ -81,20 +81,10 @@ const registerUser = async (req, res) => {
 };
 
 const verifyUser = async (req, res) => {
- 
-
-  // validate
-//   if (!token) {
-//     return res.status(400).json({
-//       message: "Please register yourself",
-//       status: false,
-//     });
-//   }
   try {
-
-     //1. get token
-  // const {token} = req.body
-  const token = req.params.token;
+    //1. get token
+    // const {token} = req.body
+    const token = req.params.token;
     //2. find the verification token in DB
     const user = await User.findOne({
       verificationToken: token,
@@ -108,8 +98,7 @@ const verifyUser = async (req, res) => {
       });
     }
     //4. update user isVerified status and remove verification token
-    user.isVerified = true, 
-    user.verificationToken = undefined
+    (user.isVerified = true), (user.verificationToken = undefined);
     user.verificationTokenExpiry = undefined;
 
     await user.save();
@@ -120,82 +109,147 @@ const verifyUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Email verification failed", error);
-   return res.status(500).json({
+    return res.status(500).json({
       status: true,
       message: "Email verification failed",
     });
   }
 };
 
-const login = async(res,req)=>{
-    // 1. get user data from body
-    const { email, password} = req.body
+const login = async (req, res) => {
+  // 1. get user data from body
+  const { email, password } = req.body;
 
-    //2. validate the data
-    if(!email || !password){
-        return res.status(400).json({
-              status: false,
-              message: "All fields are required",
-            });
+  //2. validate the data
+  if (!email || !password) {
+    return res.status(400).json({
+      status: false,
+      message: "All fields are required",
+    });
+  }
+
+  try {
+    // 3. check if user exists in DB with the provided email
+    const user = await User.findOne({ email });
+
+    //4. check idf user exist
+    if (!user) {
+      return res.status(400).json({
+        status: false,
+        message: "Invalid email or password",
+      });
     }
+    //5. check if user is verified
+    if (!user.isVerified) {
+      return res.status(400).json({
+        status: false,
+        message: "Please verify your email address",
+      });
+    }
+    // 6. compare the password
+    const isPasswordMatched = await user.comparePassword(password); // ???
 
-    try {
-        // 3. check if user exists in DB with the provided email
-        const user = await User.findOne({email})
-
-        //4. check idf user exist
-        if(!user){
-            return res.status(400).json({
-                status: false,
-                message:"Invalid email or password",
-              });  
-        }
-        //5. check if user is verified
-        if(!user.isVerified){
-            return res.status(400).json({
-                status: false,
-                message: "Please verify your email address",
-              });
-        }
-        // 6. compare the password
-        const isPasswordMatched = await user.comparePassword(password);  // ???
-
-        // check if password is correct
-        if(!isPasswordMatched){
-            return  res.status(400).json({
-                status: false,
-                message: "Invalid email or password",
-        })
+    // check if password is correct
+    if (!isPasswordMatched) {
+      return res.status(400).json({
+        status: false,
+        message: "Invalid email or password",
+      });
     }
     // jwt token
-    const jwtToken = jwt.sign({
-        id:user._id
-    }, process.env.JWT_SECRET,{
-        expiresIn:process.env.JWT_EXPIRY,  // ??
-    })
+    const jwtToken = jwt.sign(
+      {
+        id: user._id,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: process.env.JWT_EXPIRY, // ??
+      }
+    );
     //9. set cookie
     const cookieOptions = {
-        expires: new Date(Date.now() + 24* 60 *60 * 1000), // 24h
-        httpOnly:true,
-    }
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24h
+      httpOnly: true,
+    };
 
-    res.cookie("jwtToken", jwtToken, cookieOPtions)
+    res.cookie("jwtToken", jwtToken, cookieOptions);
 
-    // 10. send response 
+    // 10. send response
 
     return res.status(200).json({
-        status: true,
-        message : "User logged in successfully",
-    })
-    } catch (error) {
-        console.error("User login failed", error);
-        return res.status(500).join({
-            status:false,
-            message: "User login failed",
-        })
+      status: true,
+      message: "User logged in successfully",
+    });
+  } catch (error) {
+    console.error("User login failed", error);
+    return res.status(500).json({
+      status: false,
+      message: "User login failed",
+    });
+  }
+};
+
+const getProfile = async (req, res) => {
+  try {
+    // 1. get user id from request object
+    const userId = req.user.id;
+    // 2. find user id
+    const user = await User.findById(userId).select("-password");
+
+    //check if user exists
+    if (!user) {
+      return res.status(400).json({
+        status: false,
+        message: "User not found",
+      });
     }
-}
 
+    // 3. send response
+    return res.status(200).json({
+      status: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        isVerified: user.isVerified,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    console.error("Error getting user profile", error);
+    return res.status(500).json({
+      status: false,
+      message: "error getting user profile",
+    });
+  }
+};
 
+const logout = async (req, res) => {
+  try {
+    //1.check if user is logged in
+    if (!req.user) {
+      return res.status(401).json({
+        status: false,
+        message: "Unauthorized access",
+      });
+    }
+    //2. clear cookie
+    res.cookie("jwtToken", "", {
+      expires: new Date(Date.now()), //  // set the cookie to expire immediately after logout
+      httpOnly: true,
+    });
+    //3. send response
+    return res.status(200).json({
+      status: true,
+      message: "User logout successfully",
+    });
+  } catch (error) {
+    console.error("User logout failed", error);
+    return res.status(500).json({
+      status: false,
+      message: "User logout failed",
+    });
+  }
+};
 
-export { registerUser, verifyUser , login };
+export { registerUser, verifyUser, login, getProfile, logout };
